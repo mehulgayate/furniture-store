@@ -10,6 +10,9 @@
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 	<tx:annotation-driven />
+	
+	<bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<!-- This is the main Spring Framework configuration file. It works in conjunction 
 		with spring-mvc-servlet.xml to configure Spring-configured objects (beans). 
@@ -54,7 +57,7 @@
 		<property name="dataSource" ref="dataSource" />
 
 		<!-- Tells Hibernate where to look for annotation-marked persistent entity objects -->
-		<property name="packagesToScan" value="com.cam.entity" />
+		<property name="packagesToScan" value="com.fns.entity" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">${db.hbm2ddl}</prop>
@@ -72,4 +75,13 @@
 		class="com.evalua.entity.support.DataStoreManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>	
+	<bean id="repository"
+		class="com.fns.entity.support.Repository">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+	<bean id="productService"
+		class="com.fns.service.ProductService">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="dataStoreManager" ref="dataStoreManager" />
+	</bean>		
 </beans>

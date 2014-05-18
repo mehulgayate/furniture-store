@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME=evalua
+PROJECT_NAME=furniture-store
 TOMCAT_HOME_DIR=/evalua/servers/$PROJECT_NAME/apache-tomcat-6.0.37
 TOMCAT_BIN=$TOMCAT_HOME_DIR/bin
 PROJECT_HOME=`pwd`
@@ -27,6 +27,11 @@ rm -rf static
 ln -s $PROJECT_HOME/src/main/webapp/static static
 
 cd WEB-INF
+
+rm -rf freemarker-www
+ln -s $PROJECT_HOME/src/main/webapp/WEB-INF/freemarker-www freemarker-www
+
+
 rm -rf jsp
 ln -s $PROJECT_HOME/src/main/webapp/WEB-INF/jsp jsp
 
